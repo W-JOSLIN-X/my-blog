@@ -1,0 +1,53 @@
+---
+title: "Next.js 16 新特性一览"
+date: "2026-07-05"
+description: "Next.js 16 带来了许多激动人心的新特性，本文带你快速了解。"
+tags: ["前端", "Next.js"]
+---
+
+## Turbopack 正式版
+
+Next.js 16 将 Turbopack 作为默认构建工具，开发环境的热更新速度大幅提升。
+
+主要改进：
+
+- 启动时间减少 50%+
+- HMR 速度提升 10 倍
+- 原生支持 TypeScript
+
+## App Router 增强
+
+App Router 在 v16 中变得更加成熟：
+
+- Server Components 默认开启
+- Streaming SSR 开箱即用
+- 更灵活的 Route Handlers
+
+## MDX 支持
+
+通过 `@next/mdx` 插件，直接在项目中编写 MDX：
+
+```tsx
+// next.config.ts
+import createMDX from "@next/mdx";
+
+const withMDX = createMDX();
+
+export default withMDX({
+  pageExtensions: ["ts", "tsx", "md", "mdx"],
+});
+```
+
+## 部署优化
+
+Vercel 上的部署速度进一步提升，支持增量静态再生成 (ISR) 和按需重新验证。
+
+| 特性 | v15 | v16 |
+|------|-----|-----|
+| 构建工具 | Webpack | Turbopack |
+| 冷启动 | ~2s | ~0.5s |
+| HMR | ~200ms | ~20ms |
+
+## 总结
+
+Next.js 16 是一个性能飞跃的版本，如果你还在用老版本，强烈推荐升级体验。

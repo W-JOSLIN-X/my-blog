@@ -1,0 +1,51 @@
+---
+title: "Hello World - 我的第一篇博客"
+date: "2026-07-06"
+description: "这是我的第一篇博客文章，介绍一下这个博客的由来和计划。"
+tags: ["生活", "博客"]
+---
+
+## 为什么开始写博客
+
+写作是最低成本的个人品牌建设方式。通过写作，可以：
+
+- **梳理知识体系**，把零散的知识点串联起来
+- **加深理解**，教是最好的学
+- **建立影响力**，让更多人认识你
+- **记录成长**，回头看的时候能发现自己进步了多少
+
+## 这个博客的技术栈
+
+这个博客使用了以下技术：
+
+- **Next.js 16** - React 全栈框架，App Router 模式
+- **Tailwind CSS v4** - 实用优先的 CSS 框架
+- **MDX** - 在 Markdown 中嵌入 React 组件
+- **Vercel** - 免费部署平台
+- **Giscus** - 基于 GitHub Discussions 的评论系统
+
+## 代码展示
+
+```typescript
+// src/lib/posts.ts
+export function getAllPosts(): Post[] {
+  const filenames = fs.readdirSync(postsDirectory);
+  return filenames
+    .filter((filename) => /\.mdx?$/.test(filename))
+    .map((filename) => ({
+      slug: filename.replace(/\.mdx?$/, ""),
+      // ...frontmatter
+    }));
+}
+```
+
+## 计划写些什么
+
+后续会持续分享以下内容：
+
+1. 前端开发技巧
+2. 全栈项目实战
+3. 工具效率提升
+4. 学习心得总结
+
+> 种一棵树最好的时间是十年前，其次是现在。
