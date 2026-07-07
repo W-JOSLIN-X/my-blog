@@ -1,35 +1,47 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const nav = [
-  { href: "/", label: "HOME" },
-  { href: "/projects", label: "PROJECTS" },
-  { href: "/tags", label: "TAGS" },
-  { href: "/friends", label: "LINKS" },
-  { href: "/archives", label: "ARCHIVE" },
-  { href: "/about", label: "ABOUT" },
+  { href: "/", label: "首页", en: "HOME" },
+  { href: "/posts", label: "文章", en: "ARTICLES" },
+  { href: "/projects", label: "项目", en: "PROJECTS" },
+  { href: "/tags", label: "标签", en: "TAGS" },
+  { href: "/about", label: "关于", en: "ABOUT" },
 ];
 
 export function Header() {
+  const path = usePathname();
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-[rgba(255,255,255,0.06)]">
-      <div className="max-w-4xl mx-auto flex items-center justify-between px-4 h-12">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-bold text-sm tracking-[0.15em] uppercase text-[#e8e8e8] hover:text-[#ff6b00] transition-colors"
-        >
-          <span className="text-[#ff6b00]">■</span>
-          Roooooxy
+    <header className="sticky top-0 z-50 bg-[#0c0c10]/95 backdrop-blur-sm border-b border-[#282840]">
+      <div className="max-w-5xl mx-auto flex items-center justify-between h-12 px-6">
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="flex items-center gap-1.5 text-xs font-black tracking-[0.2em] text-[#ff5c28]">
+            <span className="w-2 h-2 bg-[#ff5c28] inline-block" />
+            ROOOOXY
+          </span>
+          <span className="text-[10px] font-mono text-[#605c6e] hidden sm:inline tracking-wider">
+            // ARCHIVE SYSTEM
+          </span>
         </Link>
         <nav className="flex items-center gap-0">
-          {nav.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="px-2.5 py-2 text-[10px] font-medium tracking-[0.12em] text-[#666] hover:text-[#e8e8e8] transition-colors"
-            >
-              {l.label}
-            </Link>
-          ))}
+          {nav.map((item) => {
+            const active = path === item.href || (item.href !== "/" && path.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`px-3 py-2 text-[10px] font-bold tracking-[0.1em] transition-colors uppercase ${
+                  active
+                    ? "text-[#ff5c28] border-b border-[#ff5c28]"
+                    : "text-[#605c6e] hover:text-[#9a96a8]"
+                }`}
+              >
+                {item.en}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>

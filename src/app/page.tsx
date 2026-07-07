@@ -1,83 +1,173 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 
+const categories = [
+  { name: "全部", slug: "" },
+  { name: "前端", slug: "前端" },
+  { name: "后端", slug: "后端" },
+  { name: "数据库", slug: "数据库" },
+  { name: "嵌入式", slug: "嵌入式" },
+  { name: "AI/ML", slug: "AIML" },
+  { name: "算法", slug: "算法" },
+  { name: "工具", slug: "工具" },
+];
+
+const skills = ["TypeScript", "React", "Next.js", "Node.js", "Python", "C", "Git", "Linux"];
+
 export default function Home() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().slice(0, 6);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
-      {/* Hero */}
-      <section className="zzz-panel p-10 md:p-16 mb-16">
-        <div className="zzz-stripes py-10 px-8 -m-10 md:-m-16">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="rec-dot">REC</span>
-            <span className="font-mono text-[11px] text-[#666] tracking-wider">
-              2026.07.06 — CH:MAIN
-            </span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
-            Roooooxy
-          </h1>
-          <p className="text-lg md:text-xl text-[#666] max-w-lg">
-            记录学习，生活，爱好点滴。
-          </p>
-          <div className="flex gap-3 mt-8">
-            <Link href="/about" className="zzz-btn primary">
-              ABOUT ME
-            </Link>
-            <Link href="/projects" className="zzz-btn">
-              PROJECTS
-            </Link>
+    <div className="max-w-5xl mx-auto px-6">
+
+      {/* ─── HERO ─── */}
+      <section className="py-16 md:py-24">
+        <div className="stripes-bg">
+          <div className="panel p-8 md:p-14">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="text-[10px] font-mono tracking-[0.2em] text-[#ff5c28] border border-[#ff5c28]/30 px-2 py-0.5">
+                SYS.BOOT
+              </span>
+              <span className="text-[10px] font-mono text-[#605c6e] tracking-wider">
+                2026.07.07 · UNIT-01
+              </span>
+            </div>
+
+            <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-4">
+              <span className="text-[#ff5c28]">ROOOOXY</span>
+              <br />
+              <span className="text-[#dedae8] text-2xl md:text-4xl font-bold tracking-wide">
+                软件开发学生 · 构建者 · 学习者
+              </span>
+            </h1>
+
+            <p className="text-[#9a96a8] text-lg max-w-xl leading-relaxed mt-6 mb-8">
+              一个热爱技术的程序学习者。记录学习笔记、项目实战、踩坑经验。
+              这是我的个人知识档案馆。
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <Link href="/posts" className="btn btn-accent">
+                ▶ 进入档案
+              </Link>
+              <Link href="/about" className="btn">
+                关于我
+              </Link>
+              <Link href="/projects" className="btn">
+                项目记录
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Posts */}
-      <section>
-        <div className="zzz-section-title">Latest Posts</div>
-        <div className="space-y-4">
+      {/* ─── LATEST POSTS ─── */}
+      <section className="mb-16">
+        <div className="sec-head">
+          <span className="mark" />
+          <span className="title">最新任务记录</span>
+          <span className="line" />
+          <Link href="/posts" className="text-[10px] font-mono text-[#605c6e] hover:text-[#ff5c28] transition-colors tracking-wider ml-auto">
+            VIEW ALL →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {posts.map((post, i) => (
-            <Link
-              key={post.slug}
-              href={`/posts/${post.slug}`}
-              className="zzz-card block p-5 group"
-            >
-              <div className="flex items-start justify-between gap-6">
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="font-mono text-[11px] text-[#444]">
-                      {new Date(post.date).toLocaleDateString("zh-CN")}
-                    </span>
-                    <span className="text-[#333]">|</span>
-                    <span className="font-mono text-[11px] text-[#444]">
-                      #{String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h2 className="text-base font-bold text-[#e8e8e8] group-hover:text-[#ff6b00] transition-colors mb-1.5">
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-[#666] line-clamp-1">
-                    {post.description}
-                  </p>
-                </div>
-                <div className="hidden sm:flex items-center gap-2 shrink-0 mt-1">
-                  {post.tags?.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-[10px] text-[#555] border border-[rgba(255,255,255,0.06)] px-2 py-0.5">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            <Link key={post.slug} href={`/posts/${post.slug}`} className="card p-5 group">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="font-mono text-[11px] text-[#ff5c28] tracking-wider">
+                  #{String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="w-px h-3 bg-[#363655]" />
+                <span className="font-mono text-[11px] text-[#605c6e]">
+                  {new Date(post.date).toLocaleDateString("zh-CN")}
+                </span>
+              </div>
+              <h3 className="font-bold text-[15px] text-[#dedae8] group-hover:text-[#ff5c28] transition-colors mb-2 line-clamp-1">
+                {post.title}
+              </h3>
+              <p className="text-[13px] text-[#9a96a8] leading-relaxed line-clamp-2">
+                {post.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-4">
+                {post.tags?.map((t) => (
+                  <span key={t} className="tag">{t}</span>
+                ))}
               </div>
             </Link>
           ))}
         </div>
-
-        {posts.length === 0 && (
-          <div className="zzz-card p-12 text-center">
-            <p className="text-[#666]">暂无文章</p>
-          </div>
-        )}
       </section>
+
+      {/* ─── CATEGORIES ─── */}
+      <section className="mb-16">
+        <div className="sec-head">
+          <span className="mark" />
+          <span className="title">分类频道</span>
+          <span className="line" />
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {categories.map((cat) => (
+            <Link
+              key={cat.slug}
+              href={cat.slug ? `/tags?tag=${cat.slug}` : "/posts"}
+              className="card p-4 group flex items-center gap-3"
+            >
+              <span className="w-1.5 h-1.5 bg-[#ff5c28] group-hover:shadow-[0_0_8px_rgba(255,92,40,0.4)] transition-shadow" />
+              <span className="text-sm font-bold text-[#dedae8] group-hover:text-[#ff5c28] transition-colors">
+                {cat.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── SKILLS ─── */}
+      <section className="mb-16">
+        <div className="sec-head">
+          <span className="mark" />
+          <span className="title">技术栈</span>
+          <span className="line" />
+        </div>
+        <div className="panel p-6">
+          <div className="flex flex-wrap gap-3">
+            {skills.map((s) => (
+              <span
+                key={s}
+                className="px-3 py-1.5 text-xs font-bold text-[#9a96a8] border border-[#363655] hover:border-[#ff5c28] hover:text-[#ff5c28] transition-colors"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── ABOUT PREVIEW ─── */}
+      <section className="mb-16">
+        <div className="sec-head">
+          <span className="mark" />
+          <span className="title">关于我</span>
+          <span className="line" />
+        </div>
+        <div className="panel p-6 flex flex-col md:flex-row gap-6 items-start">
+          <div className="shrink-0 w-16 h-16 bg-[#1a1a24] border border-[#363655] flex items-center justify-center text-2xl">
+            ◆
+          </div>
+          <div>
+            <h3 className="font-bold text-lg text-[#dedae8] mb-2">Roooooxy</h3>
+            <p className="text-sm text-[#9a96a8] leading-relaxed mb-4">
+              软件开发学生，专注于 Web 全栈开发。热爱新技术，喜欢写技术笔记，
+              相信知识分享的力量。目前正在深入学习和实践中。
+            </p>
+            <Link href="/about" className="btn text-xs py-1.5 px-4">
+              查看完整档案 →
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
