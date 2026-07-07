@@ -2,17 +2,19 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="max-w-xl mx-auto flex flex-col items-center justify-center py-32 text-center">
-      <div className="text-8xl font-bold zzz-text-gradient mb-6 zzz-glow">
-        404
+    <div className="max-w-lg mx-auto px-4 py-32 text-center">
+      <div className="zzz-panel p-12">
+        <div className="font-mono text-[11px] text-[#555] tracking-wider mb-6">
+          <span className="rec-dot inline-flex">REC</span>
+        </div>
+        <div className="text-7xl font-black text-[#ff6b00] mb-4">404</div>
+        <div className="font-mono text-xs text-[#666] tracking-[0.2em] mb-8">
+          SIGNAL NOT FOUND
+        </div>
+        <Link href="/" className="zzz-btn primary">
+          RETURN TO INDEX
+        </Link>
       </div>
-      <div className="mb-4 px-4 py-1 border border-[#2a2a45] text-xs text-[#6b6b8a] tracking-[0.2em]">
-        ◆ SIGNAL LOST ◆
-      </div>
-      <p className="text-[#8b8bae] mb-8">这个频道不存在或已丢失...</p>
-      <Link href="/" className="zzz-btn">
-        <span>返回首页</span>
-      </Link>
     </div>
   );
 }

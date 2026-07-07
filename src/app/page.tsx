@@ -5,72 +5,78 @@ export default function Home() {
   const posts = getAllPosts();
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <section className="mb-16 text-center">
-        <div className="inline-block mb-4 px-4 py-1 border border-[#2a2a45] text-xs text-[#6b6b8a] tracking-[0.2em]">
-          ◆ WELCOME TO THE SYSTEM ◆
+    <div className="max-w-4xl mx-auto px-4 py-16">
+      {/* Hero */}
+      <section className="zzz-panel p-10 md:p-16 mb-16">
+        <div className="zzz-stripes py-10 px-8 -m-10 md:-m-16">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="rec-dot">REC</span>
+            <span className="font-mono text-[11px] text-[#666] tracking-wider">
+              2026.07.06 — CH:MAIN
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
+            Roooooxy
+          </h1>
+          <p className="text-lg md:text-xl text-[#666] max-w-lg">
+            记录学习，生活，爱好点滴。
+          </p>
+          <div className="flex gap-3 mt-8">
+            <Link href="/about" className="zzz-btn primary">
+              ABOUT ME
+            </Link>
+            <Link href="/projects" className="zzz-btn">
+              PROJECTS
+            </Link>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          <span className="zzz-text-gradient zzz-glow">Roooooxy的blog</span>
-        </h1>
-        <p className="text-lg text-[#8b8bae] max-w-lg mx-auto">
-          记录学习，生活，爱好点滴。
-        </p>
-        <div className="zzz-divider mt-8 max-w-md mx-auto" />
       </section>
 
+      {/* Posts */}
       <section>
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-sm font-medium text-[#b388ff] tracking-[0.3em] uppercase flex items-center gap-2">
-            <span className="inline-block w-2 h-2 bg-[#b388ff] shadow-[0_0_6px_#b388ff]" />
-            最新文章
-          </h2>
-          <Link
-            href="/archives"
-            className="text-xs text-[#6b6b8a] hover:text-[#00e5ff] transition-colors"
-          >
-            查看全部 →
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-6">
-          {posts.map((post) => (
-            <article key={post.slug}>
-              <Link href={`/posts/${post.slug}`} className="block group">
-                <div className="zzz-card rounded p-6">
-                  <div className="flex items-center gap-3 text-xs text-[#6b6b8a] mb-3">
-                    <time dateTime={post.date}>
+        <div className="zzz-section-title">Latest Posts</div>
+        <div className="space-y-4">
+          {posts.map((post, i) => (
+            <Link
+              key={post.slug}
+              href={`/posts/${post.slug}`}
+              className="zzz-card block p-5 group"
+            >
+              <div className="flex items-start justify-between gap-6">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="font-mono text-[11px] text-[#444]">
                       {new Date(post.date).toLocaleDateString("zh-CN")}
-                    </time>
-                    {post.tags && post.tags.length > 0 && (
-                      <span className="text-[#3a3a5c]">◆</span>
-                    )}
-                    <div className="flex items-center gap-2">
-                      {post.tags?.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[#00e5ff] text-xs"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
+                    </span>
+                    <span className="text-[#333]">|</span>
+                    <span className="font-mono text-[11px] text-[#444]">
+                      #{String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-[#e0dce8] group-hover:text-[#00e5ff] transition-colors">
+                  <h2 className="text-base font-bold text-[#e8e8e8] group-hover:text-[#ff6b00] transition-colors mb-1.5">
                     {post.title}
-                  </h3>
-                  <p className="text-sm text-[#8b8bae] line-clamp-2 leading-relaxed">
+                  </h2>
+                  <p className="text-sm text-[#666] line-clamp-1">
                     {post.description}
                   </p>
-                  <div className="mt-4 flex items-center gap-2 text-[#ff2d78] text-xs group-hover:gap-4 transition-all">
-                    <span>READ MORE</span>
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </div>
                 </div>
-              </Link>
-            </article>
+                <div className="hidden sm:flex items-center gap-2 shrink-0 mt-1">
+                  {post.tags?.slice(0, 3).map((tag) => (
+                    <span key={tag} className="text-[10px] text-[#555] border border-[rgba(255,255,255,0.06)] px-2 py-0.5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
+
+        {posts.length === 0 && (
+          <div className="zzz-card p-12 text-center">
+            <p className="text-[#666]">暂无文章</p>
+          </div>
+        )}
       </section>
     </div>
   );

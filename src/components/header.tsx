@@ -1,47 +1,33 @@
 import Link from "next/link";
 
-const navLinks = [
-  { href: "/", label: "首页" },
-  { href: "/projects", label: "项目" },
-  { href: "/tags", label: "标签" },
-  { href: "/friends", label: "友链" },
-  { href: "/archives", label: "归档" },
-  { href: "/about", label: "关于" },
+const nav = [
+  { href: "/", label: "HOME" },
+  { href: "/projects", label: "PROJECTS" },
+  { href: "/tags", label: "TAGS" },
+  { href: "/friends", label: "LINKS" },
+  { href: "/archives", label: "ARCHIVE" },
+  { href: "/about", label: "ABOUT" },
 ];
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0a10]/90 backdrop-blur-md border-b border-[#2a2a45]">
-      <div className="max-w-4xl mx-auto flex items-center justify-between h-14 px-4">
+    <header className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-[rgba(255,255,255,0.06)]">
+      <div className="max-w-4xl mx-auto flex items-center justify-between px-4 h-12">
         <Link
           href="/"
-          className="font-bold text-lg tracking-wider zzz-text-gradient"
-          style={{
-            textShadow: "0 0 20px rgba(0,229,255,0.3)",
-          }}
+          className="flex items-center gap-2 font-bold text-sm tracking-[0.15em] uppercase text-[#e8e8e8] hover:text-[#ff6b00] transition-colors"
         >
+          <span className="text-[#ff6b00]">■</span>
           Roooooxy
         </Link>
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
+        <nav className="flex items-center gap-0">
+          {nav.map((l) => (
             <Link
-              key={link.href}
-              href={link.href}
-              className="px-3 py-1.5 text-sm text-[#8b8bae] hover:text-[#00e5ff] transition-colors relative group"
+              key={l.href}
+              href={l.href}
+              className="px-2.5 py-2 text-[10px] font-medium tracking-[0.12em] text-[#666] hover:text-[#e8e8e8] transition-colors"
             >
-              {link.label}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[#00e5ff] transition-all duration-300 group-hover:w-3/4" />
-            </Link>
-          ))}
-        </nav>
-        <nav className="flex md:hidden items-center gap-1 overflow-x-auto">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-2 py-1 text-xs text-[#8b8bae] hover:text-[#00e5ff] transition-colors whitespace-nowrap"
-            >
-              {link.label}
+              {l.label}
             </Link>
           ))}
         </nav>

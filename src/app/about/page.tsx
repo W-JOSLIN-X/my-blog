@@ -1,55 +1,47 @@
 export default function AboutPage() {
   const skills = [
-    { name: "React / Next.js", level: 85, color: "#00e5ff" },
-    { name: "TypeScript", level: 78, color: "#b388ff" },
-    { name: "Node.js", level: 70, color: "#69f0ae" },
-    { name: "Tailwind CSS", level: 88, color: "#ffd740" },
-    { name: "Python", level: 65, color: "#ff9100" },
-    { name: "Git / DevOps", level: 72, color: "#ff2d78" },
+    ["React / Next.js", 85, "#ff6b00"],
+    ["TypeScript", 78, "#00e5ff"],
+    ["Node.js", 70, "#ff0080"],
+    ["Tailwind CSS", 88, "#ffd700"],
+    ["Python", 65, "#00ff41"],
+    ["Git / DevOps", 72, "#ff6b00"],
   ];
 
   const timeline = [
-    { year: "2024", title: "开始系统学习前端开发", desc: "从 HTML/CSS 到 React 生态" },
-    { year: "2025", title: "深入学习全栈技术", desc: "Next.js + Node.js + 数据库" },
-    { year: "2026", title: "建立个人博客", desc: "分享学习经验与技术笔记" },
+    ["2024", "开始系统学习前端开发", "从 HTML/CSS 到 React 生态"],
+    ["2025", "深入学习全栈技术", "Next.js + Node.js + 数据库"],
+    ["2026", "建立个人博客", "分享学习经验与技术笔记"],
   ];
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <header className="text-center mb-16">
-        <div className="inline-block mb-4 px-4 py-1 border border-[#2a2a45] text-xs text-[#6b6b8a] tracking-[0.2em]">
-          ◆ ABOUT ME ◆
+    <div className="max-w-3xl mx-auto px-4 py-16">
+      <div className="zzz-panel p-8 md:p-12 mb-12 text-center">
+        <div className="flex items-center justify-center gap-3 mb-6 font-mono text-[11px] text-[#555] tracking-wider">
+          <span className="rec-dot">REC</span>
+          <span>SYSTEM PROFILE</span>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold zzz-text-gradient zzz-glow mb-6">
-          关于我
-        </h1>
-        <p className="text-[#8b8bae] leading-relaxed max-w-xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-4">关于我</h1>
+        <p className="text-[#888] max-w-lg mx-auto leading-relaxed">
           一个热爱技术与创作的前端开发者，专注于构建优秀的 Web 体验。
           喜欢探索新工具、分享知识，也热爱游戏与音乐。
         </p>
-      </header>
+      </div>
 
-      <section className="mb-16">
-        <h2 className="text-sm font-medium text-[#b388ff] tracking-[0.3em] uppercase mb-8 flex items-center gap-2">
-          <span className="inline-block w-2 h-2 bg-[#b388ff] shadow-[0_0_6px_#b388ff]" />
-          技能雷达
-        </h2>
-        <div className="zzz-card rounded p-6 md:p-8">
-          <div className="space-y-5">
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-[#c4c0d0]">{skill.name}</span>
-                  <span className="text-[#6b6b8a] font-mono">{skill.level}%</span>
+      <section className="mb-12">
+        <div className="zzz-section-title">SKILL MATRIX</div>
+        <div className="zzz-panel p-6">
+          <div className="space-y-4">
+            {skills.map(([name, level, color]) => (
+              <div key={name as string}>
+                <div className="flex justify-between text-xs mb-2">
+                  <span className="text-[#aaa] font-medium">{name}</span>
+                  <span className="font-mono text-[#555]">{level}%</span>
                 </div>
-                <div className="h-1.5 bg-[#0a0a10] border border-[#2a2a45] overflow-hidden">
+                <div className="h-1 bg-[rgba(255,255,255,0.04)] overflow-hidden">
                   <div
-                    className="h-full transition-all duration-1000"
-                    style={{
-                      width: `${skill.level}%`,
-                      backgroundColor: skill.color,
-                      boxShadow: `0 0 10px ${skill.color}`,
-                    }}
+                    className="h-full transition-all duration-700"
+                    style={{ width: `${level}%`, background: color, boxShadow: `0 0 8px ${color}66` }}
                   />
                 </div>
               </div>
@@ -59,21 +51,16 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <h2 className="text-sm font-medium text-[#b388ff] tracking-[0.3em] uppercase mb-8 flex items-center gap-2">
-          <span className="inline-block w-2 h-2 bg-[#b388ff] shadow-[0_0_6px_#b388ff]" />
-          时间线
-        </h2>
-        <div className="space-y-6">
-          {timeline.map((item, i) => (
-            <div key={i} className="zzz-card rounded p-5 flex gap-6 items-start group">
-              <div className="shrink-0 w-16 text-center">
-                <span className="text-[#00e5ff] font-bold font-mono text-lg">{item.year}</span>
+        <div className="zzz-section-title">TIMELINE</div>
+        <div className="space-y-3">
+          {timeline.map(([year, title, desc], i) => (
+            <div key={i} className="zzz-card p-5 flex gap-6 items-start">
+              <div className="shrink-0 font-mono text-sm font-bold text-[#ff6b00] tracking-wider w-12">
+                {year}
               </div>
               <div>
-                <h3 className="font-bold text-[#e0dce8] mb-1 group-hover:text-[#00e5ff] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-[#6b6b8a]">{item.desc}</p>
+                <h3 className="font-bold text-[#e8e8e8] mb-1">{title}</h3>
+                <p className="text-sm text-[#666]">{desc}</p>
               </div>
             </div>
           ))}
